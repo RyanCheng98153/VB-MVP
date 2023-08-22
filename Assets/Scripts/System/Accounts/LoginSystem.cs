@@ -11,6 +11,7 @@ public class LoginSystem : MonoBehaviour
     [SerializeField] private CurrentAccountDatas _CurrentAccountDatas;
     [SerializeField] private EditUserDataSystem _EditUserDataSystem;
     [SerializeField] private UserSystem _UserSystem;
+    
 
     // Systems
     [SerializeField] private SignUpSystem _SignUpSystem;
