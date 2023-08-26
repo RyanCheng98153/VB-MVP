@@ -9,10 +9,20 @@ public class SignUpSystem : MonoBehaviour
 {
     [SerializeField] private LoginSystem _LoginSystem;
 
-    [SerializeField] private CurrentAccountDatas _CurrentAccountDatas;
+    [SerializeField] private UserSystem _UserSystem;
 
-    [SerializeField] private GameObject _SignUpPage;
+    // === Welcome Page ===
+    // Canvas
+    [SerializeField] private GameObject _WelcomePageCanvas;
 
+    // UI
+    [SerializeField] private Button _ContinueButtom;
+
+
+    // === SignUp Page ===
+    // Canvas
+    [SerializeField] private GameObject _SignUpPageCanvas;
+    
     [SerializeField] private TMP_InputField _MailInput;
     [SerializeField] private TMP_InputField _PasswordInput;
     [SerializeField] private TMP_InputField _RepeatPasswordInput;
@@ -34,13 +44,14 @@ public class SignUpSystem : MonoBehaviour
 
     public void Start()
     {
-        _SignUpPage.SetActive(false);
+        _SignUpPageCanvas.SetActive(false);
         this.enabled = false;
     }
 
+
     public void Awake()
     {
-        _SignUpPage.SetActive(true);
+        _SignUpPageCanvas.SetActive(true);
         this.enabled = true;
 
         _MailMessage.text = "";
@@ -63,7 +74,7 @@ public class SignUpSystem : MonoBehaviour
         _ConfirmButton.onClick.AddListener( delegate { TrySignUp(); return; } );
         _BackButton.onClick.AddListener( delegate
         {
-            _SignUpPage.SetActive(false);
+            _SignUpPageCanvas.SetActive(false);
             _LoginSystem.Awake();
             this.enabled = false;
         });
@@ -117,7 +128,7 @@ public class SignUpSystem : MonoBehaviour
         Debug.Log("Create Account");
         CreateAccount(ref _Mail, ref _Password);
         
-        _SignUpPage.SetActive(false);
+        _SignUpPageCanvas.SetActive(false);
 
         _LoginSystem.Awake();
         this.enabled = false;

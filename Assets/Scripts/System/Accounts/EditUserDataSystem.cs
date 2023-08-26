@@ -6,6 +6,15 @@ using TMPro;
 
 public class EditUserDataSystem : MonoBehaviour
 {
+    
+    // === Welcome Page ===
+    // Canvas
+    [SerializeField] private GameObject _WelcomePageCanvas;
+
+    // UI
+    [SerializeField] private Button _ContinueButtom;
+
+    // === EditUserPage ===
     [SerializeField] private GameObject _EditUserDataCanvas;
     [SerializeField] private TMP_InputField _NicknameInputfield;
     [SerializeField] private TMP_InputField _IDInputsystem;
@@ -17,14 +26,24 @@ public class EditUserDataSystem : MonoBehaviour
     [SerializeField] private TMP_Dropdown _YearDropdown;
     [SerializeField] private Button _ConfirmedButton;
 
-    [SerializeField] private CurrentAccountDatas _CurrentAccountDatas;
+    [SerializeField] private UserSystem _UserSystem;
     private UserData _UserData = new UserData();
 
     public void Start()
     {
         PopulateDropdowns();
+        _WelcomePageCanvas.SetActive(false);
+
         _EditUserDataCanvas.SetActive(false);
         this.enabled = false;
+    }
+
+    public void Welcome(){
+        _WelcomePageCanvas.SetActive(true);
+        _ContinueButtom.onClick.AddListener(delegate{
+            _WelcomePageCanvas.SetActive(false);
+            Awake();
+        });
     }
 
     public void Awake()
@@ -48,7 +67,7 @@ public class EditUserDataSystem : MonoBehaviour
         _ConfirmedButton.onClick.AddListener(delegate
         {
             ConfirmUserData();
-            _CurrentAccountDatas.updateAccountDatas(_UserData);
+            _UserSystem.updateAccountDatas(_UserData);
             return;
         });
         
@@ -56,7 +75,7 @@ public class EditUserDataSystem : MonoBehaviour
 
     private void ConfirmUserData()
     {
-        string mail = _CurrentAccountDatas.get_Mail();
+        string mail = _UserSystem.get_Mail();
     }
 
 

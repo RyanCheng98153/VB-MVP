@@ -8,9 +8,8 @@ using UnityEngine.EventSystems;
 public class LoginSystem : MonoBehaviour
 {
     // keys and values sample
-    [SerializeField] private CurrentAccountDatas _CurrentAccountDatas;
-    [SerializeField] private EditUserDataSystem _EditUserDataSystem;
     [SerializeField] private UserSystem _UserSystem;
+    [SerializeField] private EditUserDataSystem _EditUserDataSystem;
     
 
     // Systems
@@ -45,11 +44,11 @@ public class LoginSystem : MonoBehaviour
     private int _PasswordLeastLength = 6;
     private int _TryLimit = 3;
 
-
     public void Awake()
     {
         this.enabled = true;
         _LoginPageCanvas.SetActive(true);
+
         _LoginButton.onClick.AddListener(delegate{
             if (_Account != "" && _Password != ""){
                 TryLogin();
@@ -118,8 +117,8 @@ public class LoginSystem : MonoBehaviour
 
     private void TryLogin()
     {
-        if (_Account == "") _LoginMessage1.text = "Account should not be empty"; return;
-        if (_Password == "") _LoginMessage2.text = "Password should not be empty"; return;
+        if (_Account == ""){ _LoginMessage1.text = "Account should not be empty"; return;}
+        if (_Password == ""){ _LoginMessage2.text = "Password should not be empty"; return;}
         
         // Maybe we won't need this showing information cause hacker can take advantage of this rule to get the access.
         //if (_Password.Length < 0 )
@@ -145,17 +144,13 @@ public class LoginSystem : MonoBehaviour
             return;
         }
 
-        _CurrentAccountDatas.LoginAccount(ref _Account, ref _Password);
+        _UserSystem.LoginAccount(ref _Account, ref _Password);
 
         if (getLoginStatus(ref _Account, ref _Password) == "user")
         {
             UserLogin();
             return;
         }
-
-        _LoginPageCanvas.SetActive(false);
-        this.enabled = false;
-
     }
 
     private string getLoginStatus(ref string account, ref string password)
@@ -174,8 +169,8 @@ public class LoginSystem : MonoBehaviour
     private void UserLogin()
     {
         // Login With User ID
-        _LoginPageCanvas.SetActive (false);
-        _LoginPageCanvas.gameObject.SetActive(false);
+        this.enabled = false;
+        _LoginPageCanvas.SetActive(false);
         _UserSystem.Awake();
         
         Debug.Log("Welcome back User");
@@ -183,7 +178,7 @@ public class LoginSystem : MonoBehaviour
 
     public void Logout()
     {
-        _CurrentAccountDatas.LogoutAccount();
+        _UserSystem.LogoutAccount();
         this.Awake();
     }
 

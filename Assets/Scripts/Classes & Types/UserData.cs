@@ -6,6 +6,7 @@ public class UserData
 {
     const string defaultString = "default";
     const int defaultInt = 0;
+    const bool defaultBoolean = false;
     public UserData(){
         
     }
@@ -29,7 +30,9 @@ public class UserData
         this.Month      = defaultInt;
         this.Day        = defaultInt;
 
-        this.FriendID         = defaultString;
+        this.FriendID   = defaultString;
+
+        this.IsComplete = defaultBoolean;
     }
 
     enum SexCode
@@ -50,4 +53,6 @@ public class UserData
     public int Month { get; set; }
     public int Day { get; set; }
     public string FriendID { get; set; }
+    public bool IsComplete { get; set; }
+
 }
