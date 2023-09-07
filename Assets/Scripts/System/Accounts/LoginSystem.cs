@@ -13,7 +13,7 @@ public class LoginSystem : MonoBehaviour
     
 
     // Systems
-    [SerializeField] private SignUpSystem _SignUpSystem;
+    [SerializeField] private RegisterSystem _RegisterSystem;
 
     // Input UIs of Login Page
     [SerializeField] private GameObject _LoginPageCanvas;
@@ -23,7 +23,7 @@ public class LoginSystem : MonoBehaviour
     [SerializeField] private Button _HidePasswordButton;
 
     // Account Related UIs
-    [SerializeField] private Button _SignUpButton;
+    [SerializeField] private Button _RegisterButton;
 
     // Response UI's of Login Page
     [SerializeField] private TMP_Text _LoginMessage1;
@@ -64,9 +64,9 @@ public class LoginSystem : MonoBehaviour
             _Password = _PasswordInput.text; 
         });
 
-        _SignUpButton.onClick.AddListener(delegate{
+        _RegisterButton.onClick.AddListener(delegate{
             _LoginPageCanvas.SetActive(false);
-            _SignUpSystem.Awake();
+            _RegisterSystem.Awake();
             this.enabled = false;
         });
 
