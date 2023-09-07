@@ -140,6 +140,8 @@ public class RegisterSystem : MonoBehaviour
         
         _RegisterPageCanvas.SetActive(false);
 
+        // === should open "welcome to VAZAAR Page"? ===
+
         _LoginSystem.Awake();
         this.enabled = false;
         return;
